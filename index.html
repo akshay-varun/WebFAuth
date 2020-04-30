@@ -3,9 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>WebFAuth</title>
-
 </head>
 <body>
 
+<div id="filesubmit">
+    <input type="file" class="file-select" accept="image/*"/>
+    <button class="file-submit">SUBMIT</button>
+</div>
+
+<script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyBr8QZpFv3AhAfsdMir-6aC-jluGBj8zsU",
+        authDomain: "webfauth.firebaseapp.com",
+        databaseURL: "https://webfauth.firebaseio.com",
+        projectId: "webfauth",
+        storageBucket: "webfauth.appspot.com",
+        messagingSenderId: "497100765840",
+        appId: "1:497100765840:web:ec7b39710d6233017bf615",
+        measurementId: "G-66066J3MBZ"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    </script>
 </body>
 </html>
