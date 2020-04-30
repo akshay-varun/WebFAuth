@@ -25,7 +25,27 @@
     };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
+    var uploader=document.getElementById('uploader');
+    var fileButton=document.getElementById('fileButton');
 
-    </script>
+    fileButton.addEventListener('change',function (e) {
+        var file=e.target.files[0];
+        var storageRef=firebase.storage().ref('videos/'+file.name);
+        var task=storageRef.put(file);
+
+        task.on('state_changed',
+            function error(err) {
+
+
+            },
+            function completed() {
+
+            }
+        );
+
+    });
+
+
+</script>
 </body>
 </html>
