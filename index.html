@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>WebFAuth</title>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
 </head>
 <body>
 
@@ -25,26 +26,29 @@
     };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
-    var uploader=document.getElementById('uploader');
-    var fileButton=document.getElementById('fileButton');
+    const storageService = firebase.storage();
+    const storageRef = storageService.ref();
+    document.querySelector('.file-select').addEventListener('change',handleFileUploadChange);
+    document.querySelector('.file-submit').addEventListener('click', handleFileUploadSubmit);
+    let selectedFile;
 
-    fileButton.addEventListener('change',function (e) {
-        var file=e.target.files[0];
-        var storageRef=firebase.storage().ref('videos/'+file.name);
-        var task=storageRef.put(file);
-
-        task.on('state_changed',
-            function error(err) {
-
-
-            },
-            function completed() {
-
-            }
-        );
-
-    });
-
+    handleFileUploadChange(e)
+    {
+        selectedFile=e.target.files[0];
+    }
+   handleFileUploadSubmit(e)
+    {
+        const uploadTask = storageRef.child(`images/${selectedFile.name}`).put(selectedFile); //create a child directory called images, and place the file inside this directory
+        uploadTask.on('state_changed', (snapshot) => {
+            // Observe state change events such as progress, pause, and resume
+        }, (error) => {
+            // Handle unsuccessful uploads
+            console.log(error);
+        }, () => {
+            // Do something once upload is complete
+            console.log('success');
+        });
+    }
 
 </script>
 </body>
